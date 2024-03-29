@@ -23,12 +23,7 @@ const Form = z.object({
 type Form = z.infer<typeof Form>
 
 const SignUpForm = () => {
-	const {
-		handleSubmit,
-		register,
-		reset,
-		formState: { errors },
-	} = useForm<Form>({ resolver: zodResolver(Form) })
+	const { register } = useForm<Form>({ resolver: zodResolver(Form) })
 
 	return (
 		<form>

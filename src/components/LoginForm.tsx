@@ -31,7 +31,9 @@ const LoginForm = () => {
 				/>
 			</div>
 
-			<Button className='w-full text-white bg-indigo-500 border-0 py-4 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg'>Login</Button>
+			<Button className='w-full text-white bg-indigo-500 border-0 py-4 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg'>
+				Login
+			</Button>
 		</form>
 	)
 }

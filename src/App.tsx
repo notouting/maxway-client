@@ -1,7 +1,15 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Footer from './components/Footer'
 import Header from './components/Header'
-import { Branch, ForChildren, Home, Login, Menyu, NotFound } from './pages'
+import {
+	Branch,
+	Cart,
+	ForChildren,
+	Home,
+	Login,
+	Menyu,
+	NotFound,
+} from './pages'
 
 const App = () => {
 	return (
@@ -15,6 +23,7 @@ const App = () => {
 				<Route path='/for-children' element={<ForChildren />} />
 				<Route path='/branchs' element={<Branch />} />
 				<Route path='/login' element={<Login />} />
+				<Route path='/cart' element={<Cart />} />
 			</Routes>
 			<Footer />
 		</>
