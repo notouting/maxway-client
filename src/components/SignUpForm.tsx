@@ -1,9 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@radix-ui/themes'
-import React from 'react'
-import { FieldValues, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import apiClient from '../service/api-client'
 
 const Form = z.object({
 	username: z
@@ -24,7 +22,7 @@ const Form = z.object({
 
 type Form = z.infer<typeof Form>
 
-const SignUpForm = ({ onLoggedIn }: { onLoggedIn: () => void }) => {
+const SignUpForm = () => {
 	const {
 		handleSubmit,
 		register,
@@ -32,132 +30,63 @@ const SignUpForm = ({ onLoggedIn }: { onLoggedIn: () => void }) => {
 		formState: { errors },
 	} = useForm<Form>({ resolver: zodResolver(Form) })
 
-	const [isShow, setShow] = React.useState(false)
-	const codeRef = React.useRef<HTMLInputElement | null>(null)
-
-	const onSubmit = (data: FieldValues) => {
-		console.log(data)
-		apiClient
-			.post('/users/signup/', data)
-			.then(res => {
-				if (res.data.access) {
-					localStorage.setItem('app-maxway-token', 'Bearer ' + res.data.access)
-
-					console.log(res.data.access)
-				}
-			})
-			.catch(err => console.error(err.message))
-	}
-
-	const verifyUser = (evt: React.FormEvent<HTMLFormElement>) => {
-		evt.preventDefault()
-
-		const data = {
-			code: codeRef.current?.value,
-		}
-
-		onLoggedIn()
-
-		// apiClient
-		// 	.post('/users/verify/', {
-		// 		headers: {
-		// 			Authorization: localStorage.getItem('app-maxway-token'),
-		// 		},
-		// 		data,
-		// 	})
-		// 	.then(res => console.log(res.data))
-		// 	.catch(err => console.error(err.message))
-
-		fetch('http://127.0.0.1:8000/api/v1/users/verify/', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: localStorage.getItem('app-maxway-token'),
-			},
-			body: JSON.stringify(data),
-		})
-	}
-
-	if (isShow) {
-		return (
-			<form onSubmit={verifyUser}>
-				<div className='w-1/4 mb-3 flex flex-col'>
-					<label htmlFor='code'>Code:</label>
-					<input
-						className='border rounded-md'
-						type='text'
-						name='code'
-						id='code'
-						ref={codeRef}
-					/>
-				</div>
-
-				<Button className='w-1/4'>Verify</Button>
-			</form>
-		)
-	}
-
 	return (
-		<form
-			onSubmit={handleSubmit(data => {
-				onSubmit(data)
-				reset()
-				setShow(!isShow)
-			})}>
-			<div className='w-1/4 mb-3 flex flex-col'>
-				<label htmlFor='username'>Username:</label>
+		<form>
+			<div className='relative flex-grow w-full mb-3'>
+				<label htmlFor='username' className='leading-7 text-sm text-gray-600'>
+					Username
+				</label>
 				<input
-					className='border rounded-md'
+					className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
 					type='text'
 					{...register('username')}
 					name='username'
 					id='username'
 				/>
-				{errors.username && (
-					<p className='text-red-500'>{errors.username?.message}</p>
-				)}
 			</div>
-			<div className='w-1/4 mb-3 flex flex-col'>
-				<label htmlFor='email'>Email:</label>
+			<div className='relative flex-grow w-full mb-3'>
+				<label htmlFor='email' className='leading-7 text-sm text-gray-600'>
+					Email
+				</label>
 				<input
-					className='border rounded-md'
+					className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
 					type='email'
 					{...register('email')}
 					name='email'
 					id='email'
 				/>
-				{errors.email && (
-					<p className='text-red-500'>{errors.email?.message}</p>
-				)}
 			</div>
-			<div className='w-1/4 mb-3 flex flex-col'>
-				<label htmlFor='password'>Password:</label>
+			<div className='relative flex-grow w-full mb-3'>
+				<label htmlFor='password' className='leading-7 text-sm text-gray-600'>
+					Password
+				</label>
 				<input
-					className='border rounded-md'
+					className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
 					type='password'
 					{...register('password')}
 					name='password'
 					id='password'
 				/>
-				{errors.password && (
-					<p className='text-red-500'>{errors.password?.message}</p>
-				)}
 			</div>
-			<div className='w-1/4 mb-3 flex flex-col'>
-				<label htmlFor='confirm-password'>Confirm password:</label>
+			<div className='relative flex-grow w-full mb-3'>
+				<label
+					htmlFor='confirm_password'
+					className='leading-7 text-sm text-gray-600'
+				>
+					Confirm Password
+				</label>
 				<input
-					className='border rounded-md'
+					className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
 					type='password'
 					{...register('confirm_password')}
 					name='confirm_password'
-					id='confirm-password'
+					id='confirm_password'
 				/>
-				{errors.confirm_password && (
-					<p className='text-red-500'>{errors.confirm_password?.message}</p>
-				)}
 			</div>
 
-			<Button className='w-1/4'>Sign Up</Button>
+			<Button className='w-full text-white bg-indigo-500 border-0 py-4 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg'>
+				Sign Up
+			</Button>
 		</form>
 	)
 }

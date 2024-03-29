@@ -1,4 +1,5 @@
 import { Container } from '@radix-ui/themes'
+import { Link } from 'react-router-dom'
 import UserAvatar from './Avatar'
 import { LogoIcon } from './Icons'
 
@@ -8,27 +9,27 @@ const Header = () => {
 			<Container>
 				<div className='flex items-center'>
 					<div className='w-[60%] flex justify-between items-center'>
-						<a href='/'>
+						<Link to='/'>
 							<LogoIcon />
 							<span className='sr-only'>MaxWay icon</span>
-						</a>
+						</Link>
 
 						<nav>
 							<ul className='flex gap-10'>
 								<li>
-									<a className='text-primary' href='#'>
+									<Link className='text-primary' to='/menyu'>
 										Menyu
-									</a>
+									</Link>
 								</li>
 								<li>
-									<a className='text-primary' href='#'>
+									<Link className='text-primary' to='/for-children'>
 										Bolalar uchun
-									</a>
+									</Link>
 								</li>
 								<li>
-									<a className='text-primary' href='#'>
+									<Link className='text-primary' to='/branchs'>
 										Filiallar
-									</a>
+									</Link>
 								</li>
 							</ul>
 						</nav>
@@ -37,7 +38,8 @@ const Header = () => {
 					<div className='w-[40%] flex justify-between items-center pl-14'>
 						<a
 							className='flex items-center gap-4 text-white before:content-[url("./phone-icon.svg")]'
-							href='tel:+998712005400'>
+							href='tel:+998712005400'
+						>
 							<span>
 								<span className='block text-sm'>(+99871)</span>
 								<span className='block text-2xl font-bold'>200-54-00</span>
@@ -46,18 +48,19 @@ const Header = () => {
 
 						<span className='w-[1px] h-11 bg-white'></span>
 
-						<a
+						<Link
 							className='flex items-center gap-4 text-white before:content-[url("./cart-icon.svg")]'
-							href='tel:+998712005400'>
+							to='/cart'
+						>
 							<span>
 								<span className='block text-2xl font-bold'>Korzina</span>
 								<span className='block text-sm'>0.00 UZS</span>
 							</span>
-						</a>
+						</Link>
 
-						<a className='text-white' href='#'>
+						<Link className='text-white' to='/login'>
 							<UserAvatar />
-						</a>
+						</Link>
 					</div>
 				</div>
 			</Container>
