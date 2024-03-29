@@ -1,4 +1,5 @@
 import { Container } from '@radix-ui/themes'
+import UserAvatar from './Avatar'
 import { LogoIcon } from './Icons'
 
 const Header = () => {
@@ -33,7 +34,7 @@ const Header = () => {
 						</nav>
 					</div>
 
-					<div className='w-[40%] flex justify-between items-center pl-20'>
+					<div className='w-[40%] flex justify-between items-center pl-14'>
 						<a
 							className='flex items-center gap-4 text-white before:content-[url("./phone-icon.svg")]'
 							href='tel:+998712005400'>
@@ -52,6 +53,10 @@ const Header = () => {
 								<span className='block text-2xl font-bold'>Korzina</span>
 								<span className='block text-sm'>0.00 UZS</span>
 							</span>
+						</a>
+
+						<a className='text-white' href='#'>
+							<UserAvatar />
 						</a>
 					</div>
 				</div>
