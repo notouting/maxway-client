@@ -21,20 +21,15 @@ interface IProducts {
 interface IContext {
   products: IProducts[] | undefined;
   setProducts: Dispatch<SetStateAction<undefined>>;
-  cartProducts: IProducts[] | undefined;
-  setCartProducts: Dispatch<SetStateAction<undefined>>;
 }
 
 const Context = createContext<IContext | null>(null);
 
 const ProductProvider = ({ children }: { children: ReactNode }) => {
-  const [products, setProducts] = React.useState();
-  const [cartProducts, setCartProducts] = React.useState();
+  const [products, setProducts] = React.useState(null);
 
   return (
-    <Context.Provider
-      value={{ products, setProducts, cartProducts, setCartProducts }}
-    >
+    <Context.Provider value={{ products, setProducts }}>
       {children}
     </Context.Provider>
   );
