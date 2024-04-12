@@ -5,15 +5,20 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
+import { BrowserRouter } from 'react-router-dom'
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
-		<Theme
-			appearance='light'
-			accentColor='yellow'
-			grayColor='sage'
-			radius='full'
-			scaling='110%'>
-			<App />
-		</Theme>
+		<BrowserRouter>
+			<Theme
+				appearance='light'
+				accentColor='yellow'
+				grayColor='sage'
+				radius='full'
+				scaling='110%'
+			>
+				<App />
+			</Theme>
+		</BrowserRouter>
 	</React.StrictMode>
 )
